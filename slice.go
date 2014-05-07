@@ -10,10 +10,10 @@ func CacheProtectedBytes(size int) []byte {
 
 func BufferedAlignedBytes(size, buffer, align int) []byte {
 	if align <= 8 {
-		b := make([]byte, buffer + size + buffer)
-		return b[buffer:size+buffer]
+		b := make([]byte, buffer+size+buffer)
+		return b[buffer : size+buffer]
 	}
-	total := size + (2*align) + (2*buffer)
+	total := size + (2 * align) + (2 * buffer)
 	b := make([]byte, total)
 	p := int(uintptr(unsafe.Pointer(&b[buffer])))
 	rem := p % align
@@ -21,9 +21,9 @@ func BufferedAlignedBytes(size, buffer, align int) []byte {
 	if rem != 0 {
 		offset += align - rem
 	}
-	bs := b[offset:size+offset]
+	bs := b[offset : size+offset]
 	// These should be unit tests
-	if int(uintptr(unsafe.Pointer(&bs[0])))% align != 0 {
+	if int(uintptr(unsafe.Pointer(&bs[0])))%align != 0 {
 		panic("Bad alignment")
 	}
 	if len(bs) != size {
@@ -33,8 +33,8 @@ func BufferedAlignedBytes(size, buffer, align int) []byte {
 }
 
 func CacheProtectedPointers(size int) []unsafe.Pointer {
-	b := make([]unsafe.Pointer, 64 + size + 64)
-	return b[64:size+64]
+	b := make([]unsafe.Pointer, 64+size+64)
+	return b[64 : size+64]
 }
 
 func powerOfTwo(val int64) bool {

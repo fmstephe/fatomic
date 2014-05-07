@@ -4,8 +4,8 @@ import "sync/atomic"
 
 type AtomicInt struct {
 	before [7]int64
-	Value int64
-	after [8]int64
+	Value  int64
+	after  [8]int64
 }
 
 // Sequentially consistent load of Value
